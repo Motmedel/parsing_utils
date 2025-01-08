@@ -1,8 +1,8 @@
 module github.com/Motmedel/parsing_utils
 
-go 1.22.0
+go 1.23.4
 
 require (
-	github.com/gammazero/deque v0.2.1
-	github.com/pandatix/go-abnf v0.0.0-20240509074450-1575529a905e
+	github.com/gammazero/deque v1.0.0
+	github.com/pandatix/go-abnf v0.1.7
 )
