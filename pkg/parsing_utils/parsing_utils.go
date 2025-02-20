@@ -1,6 +1,9 @@
 package parsing_utils
 
 import (
+	"fmt"
+	parsingUtilsErrors "github.com/Motmedel/parsing_utils/pkg/errors"
+	motmedelErrors "github.com/Motmedel/utils_go/pkg/errors"
 	"github.com/gammazero/deque"
 	goabnf "github.com/pandatix/go-abnf"
 	"slices"
@@ -62,4 +65,23 @@ func SearchPathSingle(path *goabnf.Path, names []string, maxDepth int, searchMat
 
 func SearchPathSingleName(path *goabnf.Path, name string, maxDepth int, searchMatch bool) *goabnf.Path {
 	return SearchPathSingle(path, []string{name}, maxDepth, searchMatch)
+}
+
+func GetParsedDataPaths(grammar *goabnf.Grammar, data []byte) ([]*goabnf.Path, error) {
+	if grammar == nil {
+		return nil, motmedelErrors.MakeErrorWithStackTrace(parsingUtilsErrors.ErrNilGrammar)
+	}
+
+	if len(data) == 0 {
+		return nil, motmedelErrors.MakeErrorWithStackTrace(
+			fmt.Errorf("%w: %w", motmedelErrors.ErrSyntaxError, parsingUtilsErrors.ErrEmptyData),
+		)
+	}
+
+	paths, err := goabnf.Parse(data, grammar, "root")
+	if err != nil {
+		return nil, motmedelErrors.MakeErrorWithStackTrace(fmt.Errorf("goabnf parse: %w", err), data)
+	}
+
+	return paths, nil
 }

@@ -6,3 +6,5 @@ require (
 	github.com/gammazero/deque v1.0.0
 	github.com/pandatix/go-abnf v0.1.7
 )
+
+require github.com/Motmedel/utils_go v0.0.113
