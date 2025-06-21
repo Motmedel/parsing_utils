@@ -1,5 +1,5 @@
-github.com/Motmedel/utils_go v0.0.113 h1:eH0e39x7WpsURpv2WwdAb2YDifxehjwWrYcpmiwG6MM=
-github.com/Motmedel/utils_go v0.0.113/go.mod h1:3Wry5+hEGzgzLRcBdpU8uhUUSAVJB7NzILiM7i1t7g4=
+github.com/Motmedel/utils_go v0.0.219 h1:smIK1sib6UbF2bPvB0xN1auvfBgqzY5gpJTJFbXVvww=
+github.com/Motmedel/utils_go v0.0.219/go.mod h1:kKm8jM7GA8M7ICIImi5etOMixRgQfnStBPjEoCMTgbg=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/gammazero/deque v1.0.0 h1:LTmimT8H7bXkkCy6gZX7zNLtkbz4NdS2z8LZuor3j34=

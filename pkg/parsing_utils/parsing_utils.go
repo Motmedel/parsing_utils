@@ -33,7 +33,7 @@ func _searchPath(path *goabnf.Path, names []string, maxDepth int, searchMatch bo
 			}
 		}
 
-		remainingNodesAtDepth = -1
+		remainingNodesAtDepth -= -1
 
 		if (maxDepth == -1 || currentDepth != maxDepth) && !(nameMatches && !searchMatch) {
 			for _, subpath := range currentNode.Subpaths {
@@ -69,18 +69,18 @@ func SearchPathSingleName(path *goabnf.Path, name string, maxDepth int, searchMa
 
 func GetParsedDataPaths(grammar *goabnf.Grammar, data []byte) ([]*goabnf.Path, error) {
 	if grammar == nil {
-		return nil, motmedelErrors.MakeErrorWithStackTrace(parsingUtilsErrors.ErrNilGrammar)
+		return nil, motmedelErrors.NewWithTrace(parsingUtilsErrors.ErrNilGrammar)
 	}
 
 	if len(data) == 0 {
-		return nil, motmedelErrors.MakeErrorWithStackTrace(
+		return nil, motmedelErrors.NewWithTrace(
 			fmt.Errorf("%w: %w", motmedelErrors.ErrSyntaxError, parsingUtilsErrors.ErrEmptyData),
 		)
 	}
 
 	paths, err := goabnf.Parse(data, grammar, "root")
 	if err != nil {
-		return nil, motmedelErrors.MakeErrorWithStackTrace(fmt.Errorf("goabnf parse: %w", err), data)
+		return nil, motmedelErrors.NewWithTrace(fmt.Errorf("goabnf parse: %w", err), data)
 	}
 
 	return paths, nil
