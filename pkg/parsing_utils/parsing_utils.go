@@ -2,11 +2,12 @@ package parsing_utils
 
 import (
 	"fmt"
+	"slices"
+
 	parsingUtilsErrors "github.com/Motmedel/parsing_utils/pkg/errors"
 	motmedelErrors "github.com/Motmedel/utils_go/pkg/errors"
 	"github.com/gammazero/deque"
 	goabnf "github.com/pandatix/go-abnf"
-	"slices"
 )
 
 func ExtractPathValue(input []byte, path *goabnf.Path) []byte {
@@ -80,7 +81,7 @@ func GetParsedDataPaths(grammar *goabnf.Grammar, data []byte) ([]*goabnf.Path, e
 
 	paths, err := goabnf.Parse(data, grammar, "root")
 	if err != nil {
-		return nil, motmedelErrors.NewWithTrace(fmt.Errorf("goabnf parse: %w", err), data)
+		return nil, motmedelErrors.NewWithTrace(fmt.Errorf("goabnf parse: %w", err))
 	}
 
 	return paths, nil
