@@ -6,7 +6,6 @@ import (
 
 	parsingUtilsErrors "github.com/Motmedel/parsing_utils/pkg/errors"
 	motmedelErrors "github.com/Motmedel/utils_go/pkg/errors"
-	"github.com/gammazero/deque"
 	goabnf "github.com/pandatix/go-abnf"
 )
 
@@ -21,11 +20,11 @@ func _searchPath(path *goabnf.Path, names []string, maxDepth int, searchMatch bo
 	remainingNodesAtDepth := 1
 	nextDepthCount := len(path.Subpaths)
 
-	var dq deque.Deque[*goabnf.Path]
-	dq.PushBack(path)
+	queue := []*goabnf.Path{path}
 
-	for dq.Len() != 0 {
-		currentNode := dq.PopFront()
+	for len(queue) != 0 {
+		currentNode := queue[0]
+		queue = queue[1:]
 		nameMatches := slices.Contains(names, currentNode.MatchRule)
 		if nameMatches {
 			paths = append(paths, currentNode)
@@ -38,7 +37,7 @@ func _searchPath(path *goabnf.Path, names []string, maxDepth int, searchMatch bo
 
 		if (maxDepth == -1 || currentDepth != maxDepth) && !(nameMatches && !searchMatch) {
 			for _, subpath := range currentNode.Subpaths {
-				dq.PushBack(subpath)
+				queue = append(queue, subpath)
 			}
 		}
 
